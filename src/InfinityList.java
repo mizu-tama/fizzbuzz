@@ -1,29 +1,36 @@
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
+public class InfinityList<E> implements Iterator<E> {
 
-public class InfinityList<E> implements Iterator<E>{
+    private List<E> seed;
+    private int seedSize;
+    private int nextIndex;
 
-	public InfinityList(List<E> xs) {
-		// TODO Auto-generated constructor stub
-	}
+    public InfinityList(List<E> xs) {
+        seed = xs;
+        seedSize = xs.size();
+        nextIndex = 0;
+    }
 
-	@Override
-	public boolean hasNext() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean hasNext() {
+        return true;
+    }
 
-	@Override
-	public E next() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public E next() {
+        int index = nextIndex;
+        nextIndex++;
+        if (nextIndex >= seedSize) {
+            nextIndex = 0;
+        }
 
-	@Override
-	public void remove() {
-		// TODO Auto-generated method stub
-		
-	}
+        return seed.get(index);
+    }
+
+    @Override
+    public void remove() {
+        throw new UnsupportedOperationException();
+    }
 
 }
